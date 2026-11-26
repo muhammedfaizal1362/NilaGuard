@@ -1,0 +1,12 @@
+.venv/
+.venv313/
+.buildozer/
+bin/
+__pycache__/
+.pytest_cache/
+.coverage
+*.pyc
+*.log
+*.backup
+*.bak
+releases/
