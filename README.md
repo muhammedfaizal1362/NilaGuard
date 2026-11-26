@@ -54,19 +54,21 @@ Examines structural characteristics of submitted URLs. It does not visit or open
 
 ## Evaluation
 
-The prototype was evaluated using a small synthetic dataset of 11 test samples.
+The prototype was evaluated using a small synthetic dataset of 17 test samples.
 
 | Metric | Result |
 |---|---:|
-| Test samples | 11 |
-| True Positives | 5 |
-| True Negatives | 5 |
-| False Positives | 1 |
+| Test samples | 17 |
+| True Positives | 8 |
+| True Negatives | 6 |
+| False Positives | 3 |
 | False Negatives | 0 |
-| Accuracy | 90.91% |
-| Precision | 0.83 |
+| Accuracy | 82.35% |
+| Precision | 0.73 |
 | Recall | 1.00 |
-| F1 Score | 0.91 |
+| F1 Score | 0.84 |
+
+Testing identified false positives caused by keyword-based matching and a missed indicator that was addressed with an additional testable rule.
 
 These results represent a small synthetic evaluation and do not establish real-world detection performance.
 
@@ -96,6 +98,18 @@ Run the project's test suite:
 
     python -m pytest -v
 
+## Privacy & Security
+
+- Message and URL analysis is performed locally by the application logic.
+- The inspected source code contains no visible external network-request logic for submitting scan inputs.
+- Scan history is maintained in application memory during the session.
+- History is not visibly written to a persistent file or database in the inspected code.
+- The application does not intentionally open submitted URLs during structural analysis.
+- No explicit Android permissions are configured in the inspected Buildozer configuration.
+- This prototype has not undergone a comprehensive security audit.
+
+Users should avoid entering sensitive personal information into an experimental application.
+
 ## Limitations
 
 - Rule-based detection may miss unknown scam patterns.
@@ -111,3 +125,5 @@ NilaGuard is an educational cybersecurity prototype. It provides rule-based asse
 ## Project Status
 
 Developed as a cybersecurity learning and prototyping project with a desktop dashboard and Android application interface.
+
+

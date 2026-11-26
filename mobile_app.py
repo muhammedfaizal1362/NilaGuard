@@ -142,7 +142,7 @@ class NilaGuardApp(App):
     def make_header(self):
         h = BoxLayout(orientation='horizontal', size_hint_y=None, height=dp(70), spacing=dp(10))
         h.padding = [0, dp(15), 0, 0]
-        logo = NGLabel(text='◈', font_size='36sp', color=self.cyan, size_hint_x=None, width=dp(52))
+        logo = NGLabel(text='N', font_size='36sp', color=self.cyan, size_hint_x=None, width=dp(52))
         titles = BoxLayout(orientation='vertical', spacing=0)
         titles.add_widget(NGLabel(text='[b]NilaGuard[/b]', markup=True, font_size='25sp', color=self.cyan))
         titles.add_widget(NGLabel(text='MULTILINGUAL SCAM DEFENSE', font_size='10sp', color=self.muted))
@@ -205,7 +205,7 @@ class NilaGuardApp(App):
         panel.add_widget(top)
 
         panel.add_widget(Label(text='', size_hint_y=0.12))
-        shield = NGLabel(text='◈', font_size='100sp', color=self.cyan, halign='center',
+        shield = NGLabel(text='N', font_size='100sp', color=self.cyan, halign='center',
                          size_hint_y=None, height=dp(150))
         panel.add_widget(shield)
         pulse = Animation(font_size=dp(112), duration=0.85) + Animation(font_size=dp(96), duration=0.85)
@@ -242,12 +242,12 @@ class NilaGuardApp(App):
         hero.add_widget(NGLabel(text='[b]DIGITAL DEFENSE CENTER[/b]',
                                markup=True, font_size='20sp', color=WHITE,
                                size_hint_y=None, height=dp(40)))
-        shield = NGLabel(text='◈', font_size='72sp', color=self.cyan,
+        shield = NGLabel(text='N', font_size='72sp', color=self.cyan,
                          size_hint_y=None, height=dp(90))
         hero.add_widget(shield)
         Animation(font_size=dp(78), duration=.8).start(shield)
         Animation(font_size=dp(68), duration=.8).start(shield)
-        hero.add_widget(NGLabel(text='MONITOR suspicious messages and links\\nusing explainable security indicators.',
+        hero.add_widget(NGLabel(text='MONITOR suspicious messages and links\nusing explainable security indicators.',
                                color=self.muted, halign='center'))
         content.add_widget(hero)
         quick = Card(orientation='vertical', padding=dp(14), spacing=dp(10),
@@ -314,7 +314,7 @@ class NilaGuardApp(App):
 
         self.animation_card = Card(orientation='vertical', padding=dp(12), spacing=dp(8),
                                   size_hint_y=None, height=dp(110), color=PANEL)
-        self.scan_visual = NGLabel(text='◈', font_size='38sp', color=self.cyan,
+        self.scan_visual = NGLabel(text='N', font_size='38sp', color=self.cyan,
                                   halign='center', size_hint_y=None, height=dp(50))
         self.scan_status = NGLabel(text='SYSTEM READY  •  AWAITING INPUT', color=self.muted, halign='center')
         self.progress = ProgressBar(max=100, value=0, size_hint_y=None, height=dp(12))
@@ -374,7 +374,7 @@ class NilaGuardApp(App):
         self.result_label.text = ''
         self.result_card.opacity = 0
         self.scan_status.text = 'INITIALIZING SECURITY SCAN...'
-        self.scan_visual.text = '◈'
+        self.scan_visual.text = 'N'
         self.scan_visual.font_size = dp(38)
         self._pulse = Animation(font_size=dp(46), duration=.35) + Animation(font_size=dp(38), duration=.35)
         self._pulse.repeat = True
@@ -385,7 +385,7 @@ class NilaGuardApp(App):
     def _scan_tick(self, dt):
         self.scan_progress += 4
         Animation(value=min(100, self.scan_progress), duration=.12).start(self.progress)
-        frames = ['◈', '◇', '◆', '◇']
+        frames = ['N', '+', '*', '+']
         self.scan_visual.text = frames[(self.scan_progress // 8) % len(frames)]
         if self.scan_progress < 35:
             self.scan_status.text = '01  /  INSPECTING INPUT...'
@@ -404,22 +404,22 @@ class NilaGuardApp(App):
         try:
             if self.mode == 'message':
                 result = analyze_message(value)
-                findings = '\\n'.join('• {} — {}'.format(x.get('category', 'Indicator'),
+                findings = '\n'.join('• {} — {}'.format(x.get('category', 'Indicator'),
                                x.get('matched_indicator', '')) for x in result.get('findings', []))
                 findings = findings or 'No predefined indicators detected.'
                 score = result.get('score', 0)
                 level = result.get('level', 'Unknown')
-                output = ('[b]MESSAGE ANALYSIS[/b]\\n\\n[b]Risk score:[/b] {}%\\n'
-                          '[b]Result:[/b] {}\\n\\n[b]Indicators[/b]\\n{}\\n\\n{}\\n\\n'
+                output = ('[b]MESSAGE ANALYSIS[/b]\n\n[b]Risk score:[/b] {}%\n'
+                          '[b]Result:[/b] {}\n\n[b]Indicators[/b]\n{}\n\n{}\n\n'
                           '[i]Rule-based assessment only.[/i]').format(score, level, findings,
                                                                        result.get('message', ''))
                 color = RED if int(score or 0) >= 70 else (AMBER if int(score or 0) >= 35 else GREEN)
             else:
                 result = analyze_url(value)
-                findings = '\\n'.join('• {}'.format(x) for x in result.get('findings', []))
+                findings = '\n'.join('• {}'.format(x) for x in result.get('findings', []))
                 findings = findings or 'No structural indicators detected.'
-                output = ('[b]URL ANALYSIS[/b]\\n\\n[b]Format valid:[/b] {}\\n'
-                          '[b]Hostname:[/b] {}\\n\\n[b]Findings[/b]\\n{}\\n\\n{}\\n\\n'
+                output = ('[b]URL ANALYSIS[/b]\n\n[b]Format valid:[/b] {}\n'
+                          '[b]Hostname:[/b] {}\n\n[b]Findings[/b]\n{}\n\n{}\n\n'
                           '[i]Structural analysis only. The URL was not opened.[/i]').format(
                               result.get('valid', 'N/A'), result.get('hostname', 'N/A'),
                               findings, result.get('message', ''))
@@ -438,7 +438,7 @@ class NilaGuardApp(App):
             self.scan_visual.color = rgba(color)
             Clock.schedule_once(lambda dt: self.show_page('result'), .15)
         except Exception as e:
-            self.result_label.text = 'Analysis could not be completed.\\n{}'.format(str(e))
+            self.result_label.text = 'Analysis could not be completed.\n{}'.format(str(e))
             self.result_label.markup = False
             self.scan_status.text = 'Scan error'
         finally:
@@ -518,7 +518,7 @@ class NilaGuardApp(App):
             size_hint_y=None, height=dp(38)
         ))
 
-        formatted = self.latest_output.replace('\\n', '\\n\\n')
+        formatted = self.latest_output.replace('\n', '\n\n')
         report = NGLabel(text=formatted, markup=True,
             color=rgba(WHITE), halign='left', valign='top',
             size_hint=(1, None), height=dp(390))
@@ -530,7 +530,7 @@ class NilaGuardApp(App):
         note = Card(orientation='vertical', padding=dp(14),
             size_hint_y=None, height=dp(90), color=PANEL)
         note.add_widget(NGLabel(
-            text='[b]NOTE[/b]\\nAutomated indicators are not a definitive verdict. Verify independently.',
+            text='[b]NOTE[/b]\nAutomated indicators are not a definitive verdict. Verify independently.',
             markup=True, color=self.muted, halign='center'
         ))
         content.add_widget(note)
@@ -559,7 +559,7 @@ class NilaGuardApp(App):
         if not self.history:
             empty = Card(orientation='vertical', padding=dp(18), size_hint_y=None,
                          height=dp(120), color=PANEL)
-            empty.add_widget(NGLabel(text='No scans in this session yet.\\nYour recent scan summaries will appear here.',
+            empty.add_widget(NGLabel(text='No scans in this session yet.\nYour recent scan summaries will appear here.',
                                     color=self.muted, halign='center'))
             items.add_widget(empty)
         else:
@@ -593,14 +593,14 @@ class NilaGuardApp(App):
                             color=rgba(WHITE)))
         c.add_widget(NGLabel(text='[b]Privacy & limitations[/b]', markup=True, color=CYAN,
                             size_hint_y=None, height=dp(30)))
-        c.add_widget(NGLabel(text='• Analysis is rule-based and may miss or misclassify content.\\n\\n'
-                            '• No URL is opened during structural analysis.\\n\\n'
-                            '• Do not treat a result as proof that content is safe or malicious.\\n\\n'
+        c.add_widget(NGLabel(text='• Analysis is rule-based and may miss or misclassify content.\n\n'
+                            '• No URL is opened during structural analysis.\n\n'
+                            '• Do not treat a result as proof that content is safe or malicious.\n\n'
                             '• Avoid entering sensitive personal information.',
                             color=rgba(MUTED)))
         c.add_widget(NGLabel(text='[b]Version[/b]   Prototype 0.2', markup=True, color=rgba(WHITE),
                             size_hint_y=None, height=dp(30)))
-        c.add_widget(NGLabel(text='[b]DEVELOPED BY[/b]\\nMuhammed Faizal\\nCybersecurity Enthusiast | Student Developer',
+        c.add_widget(NGLabel(text='[b]DEVELOPED BY[/b]\nMuhammed Faizal\nCybersecurity Enthusiast | Student Developer',
                             markup=True, color=self.cyan, halign='center',
                             size_hint_y=None, height=dp(95)))
         scroll.add_widget(c)

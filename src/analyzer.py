@@ -37,7 +37,8 @@ INDICATORS = {
 "reward_claim": [
     "you won",
     "winner",
-    "claim your prize",
+    "claim your reward",
+    "claim your prize" ,
     "free gift",
     "sammanam",
     "prize kitti",

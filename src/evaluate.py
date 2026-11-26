@@ -8,15 +8,23 @@ def evaluate_dataset():
     fp = 0
     fn = 0
 
+    print("\n--- Sample-wise Evaluation ---")
+
     with open("data/test_messages.csv", newline="", encoding="utf-8") as file:
         reader = csv.DictReader(file)
 
-        for row in reader:
+        for i, row in enumerate(reader, 1):
             message = row["message"]
             actual = int(row["label"])
 
             result = analyze_message(message)
             predicted = 1 if result["score"] > 0 else 0
+
+            status = "CORRECT" if actual == predicted else "INCORRECT"
+
+            print(f"\nTest {i}: {status}")
+            print("Message:", message)
+            print("Expected:", actual, "| Predicted:", predicted)
 
             if actual == 1 and predicted == 1:
                 tp += 1
@@ -39,6 +47,7 @@ def evaluate_dataset():
     )
 
     print("\n--- NilaGuard Evaluation ---")
+    print("Total Samples:", total)
     print("True Positives:", tp)
     print("True Negatives:", tn)
     print("False Positives:", fp)
@@ -51,3 +60,4 @@ def evaluate_dataset():
 
 if __name__ == "__main__":
     evaluate_dataset()
+
