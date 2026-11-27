@@ -147,3 +147,16 @@ A signed Android APK is available from the GitHub Releases page:
 - This prototype does not guarantee scam detection.
 - Always independently verify messages, links, and requests for money or personal information.
 
+
+## Screenshots
+
+### NilaGuard Mobile App
+
+![NilaGuard screenshot 1](docs/screenshots/Screenshot%202026-11-27%20064737.png)
+
+![NilaGuard screenshot 2](docs/screenshots/Screenshot%202026-11-27%20064832.png)
+
+![NilaGuard screenshot 3](docs/screenshots/Screenshot%202026-11-27%20064911.png)
+
+![NilaGuard screenshot 4](docs/screenshots/Screenshot%202026-11-27%20064936.png)
+
