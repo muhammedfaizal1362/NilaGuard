@@ -127,3 +127,23 @@ NilaGuard is an educational cybersecurity prototype. It provides rule-based asse
 Developed as a cybersecurity learning and prototyping project with a desktop dashboard and Android application interface.
 
 
+
+## Android Release
+
+**Version:** v0.1.0
+
+A signed Android APK is available from the GitHub Releases page:
+
+[Download NilaGuard v0.1.0](https://github.com/muhammedfaizal1362/NilaGuard/releases/tag/v0.1.0)
+
+- Release format: APK
+- Build type: Signed release
+- Tested on a physical Android device
+
+## Privacy & Limitations
+
+- Analysis is based on predefined rules and indicators.
+- Results may contain false positives or miss suspicious content.
+- This prototype does not guarantee scam detection.
+- Always independently verify messages, links, and requests for money or personal information.
+
